@@ -1,9 +1,10 @@
+
 'use client'
 
 import { useEffect, useState } from 'react'
+import { FaFacebookF, FaInstagram } from 'react-icons/fa'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Phone, X } from 'lucide-react'
-
 import { site } from '@/lib/site'
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -49,10 +50,43 @@ export function FloatingActions() {
         ) : null}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {visible ? (
-          <motion.div
-            key="call"
+<AnimatePresence>
+  {visible ? (
+    <>
+      <motion.a
+        href="https://facebook.com/YOUR_PAGE"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, scale: 0.7, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.7, y: 16 }}
+        transition={{ duration: 0.3, delay: 0.02 }}
+        whileHover={{ scale: 1.06 }}
+        className="flex size-13 items-center justify-center rounded-full bg-[#1877F2] text-white shadow-lg shadow-black/40 sm:size-14"
+      >
+        <FaFacebookF className="size-6" />
+      </motion.a>
+
+      <motion.a
+        href="https://instagram.com/YOUR_PAGE"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, scale: 0.7, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.7, y: 16 }}
+        transition={{ duration: 0.3, delay: 0.04 }}
+        whileHover={{ scale: 1.06 }}
+        className="flex size-13 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 text-white shadow-lg shadow-black/40 sm:size-14"
+      >
+        <FaInstagram className="size-6" />
+      </motion.a>
+    </>
+  ) : null}
+</AnimatePresence>
+<AnimatePresence>
+  {visible ? (
+    <motion.div
+      key="call"
             initial={{ opacity: 0, scale: 0.7, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.7, y: 16 }}
