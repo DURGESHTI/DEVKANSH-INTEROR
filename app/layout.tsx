@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Cormorant_Garamond, Jost } from 'next/font/google'
+import { Cormorant_Garamond } from "next/font/google"
+
 
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
@@ -8,11 +9,6 @@ import { FloatingActions } from '@/components/floating-actions'
 import { site } from '@/lib/site'
 import './globals.css'
 
-const _jost = Jost({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['300', '400', '500', '600'],
-})
 
 const _cormorant = Cormorant_Garamond({
   subsets: ['latin'],

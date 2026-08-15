@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 
 const GOOGLE_SCRIPT_URL =
- 'https://script.google.com/macros/s/AKfycbyxlwCcc4-_gxiaDgi2qh1_SpMo2sPEP6raTbpweYDgm35s7Qapi-63bb719unqxaedEw/exec' 
+'https://script.google.com/macros/s/AKfycbyVq7wPn6MOdd-V9GagL9nXaeygn0BV2RueNQdIk6vfF6e7LGZA4uF5zDn_UXXzb7tHug/exec'
 export default function LeadPopup() {
   const [open, setOpen] = useState(false)
 
