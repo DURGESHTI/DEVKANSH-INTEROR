@@ -1,3 +1,5 @@
+'use client'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Award, Clock, ShieldCheck, Users } from 'lucide-react'
@@ -12,7 +14,7 @@ import { TestimonialSlider } from '@/components/testimonial-slider'
 import { CtaBand } from '@/components/cta-band'
 import { beforeAfter, faqs, projects, services } from '@/lib/data'
 import { site } from '@/lib/site'
-
+import LeadPopup from '@/components/lead-popup'
 const promises = [
   {
     icon: ShieldCheck,
@@ -43,7 +45,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-
       {/* Intro / About strip */}
       <section className="border-b border-border py-20 lg:py-28">
         <div className="mx-auto grid w-full max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-20">
@@ -404,7 +405,9 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
-      </section>
-    </>
-  )
+    
+</section>
+<LeadPopup />
+</>
+)
 }
