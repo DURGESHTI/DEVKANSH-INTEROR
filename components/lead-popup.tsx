@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 
 const GOOGLE_SCRIPT_URL =
-'https://script.google.com/macros/s/AKfycbyVq7wPn6MOdd-V9GagL9nXaeygn0BV2RueNQdIk6vfF6e7LGZA4uF5zDn_UXXzb7tHug/exec'
+  'https://script.google.com/macros/s/AKfycbzhvWioLuWgxR0_VVCXiIRQX9H_ojQsktLyp5FjCxZR358ebUiU9rcCwkoga-HAQQLjXw/exec'
+
 export default function LeadPopup() {
   const [open, setOpen] = useState(false)
 
@@ -19,31 +20,39 @@ export default function LeadPopup() {
   const [success, setSuccess] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = window.setTimeout(() => {
       setOpen(true)
     }, 5000)
 
-    return () => clearTimeout(timer)
+    return () => window.clearTimeout(timer)
   }, [])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (submitting) return
 
     setSubmitting(true)
 
     const finalProjectType =
       projectType === 'Any Other' ? otherProject : projectType
 
+    const formData = {
+      firstName: name.trim(),
+      lastName: surname.trim(),
+      email: email.trim(),
+      projectType: finalProjectType.trim(),
+      description: description.trim(),
+    }
+
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        body: JSON.stringify({
-          firstName: name,
-          lastName: surname,
-          email: email,
-          projectType: finalProjectType,
-          description: description,
-        }),
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(formData),
       })
 
       setSuccess(true)
@@ -55,12 +64,12 @@ export default function LeadPopup() {
       setOtherProject('')
       setDescription('')
 
-      setTimeout(() => {
+      window.setTimeout(() => {
         setOpen(false)
         setSuccess(false)
       }, 2500)
     } catch (error) {
-      console.error('Form submission error:', error)
+      console.error('Lead form submission error:', error)
       alert('Something went wrong. Please try again.')
     } finally {
       setSubmitting(false)
@@ -82,7 +91,6 @@ export default function LeadPopup() {
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             className="relative max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-2xl border border-yellow-600/50 bg-black p-7 shadow-2xl"
           >
-            {/* Close Button */}
             <button
               type="button"
               onClick={() => setOpen(false)}
@@ -92,7 +100,6 @@ export default function LeadPopup() {
               <X size={24} />
             </button>
 
-            {/* Heading */}
             <div className="pr-10">
               <h2 className="text-3xl font-bold text-yellow-400">
                 Transform Your Space
@@ -106,7 +113,6 @@ export default function LeadPopup() {
               </p>
             </div>
 
-            {/* Success Message */}
             {success ? (
               <div className="mt-10 rounded-xl border border-yellow-500/40 bg-yellow-500/10 p-8 text-center">
                 <div className="text-2xl font-bold text-yellow-400">
@@ -118,11 +124,7 @@ export default function LeadPopup() {
                 </p>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="mt-8 space-y-7"
-              >
-                {/* First Name */}
+              <form onSubmit={handleSubmit} className="mt-8 space-y-7">
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-yellow-400">
                     First Name
@@ -138,7 +140,6 @@ export default function LeadPopup() {
                   />
                 </div>
 
-                {/* Last Name */}
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-yellow-400">
                     Last Name
@@ -154,7 +155,6 @@ export default function LeadPopup() {
                   />
                 </div>
 
-                {/* Email */}
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-yellow-400">
                     Email ID
@@ -170,7 +170,6 @@ export default function LeadPopup() {
                   />
                 </div>
 
-                {/* Project Type */}
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-yellow-400">
                     Project Type
@@ -180,9 +179,10 @@ export default function LeadPopup() {
                     required
                     value={projectType}
                     onChange={(e) => {
-                      setProjectType(e.target.value)
+                      const value = e.target.value
+                      setProjectType(value)
 
-                      if (e.target.value !== 'Any Other') {
+                      if (value !== 'Any Other') {
                         setOtherProject('')
                       }
                     }}
@@ -201,7 +201,6 @@ export default function LeadPopup() {
                   </select>
                 </div>
 
-                {/* Any Other */}
                 {projectType === 'Any Other' && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
@@ -222,7 +221,6 @@ export default function LeadPopup() {
                   </motion.div>
                 )}
 
-                {/* Description */}
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-yellow-400">
                     Description
@@ -238,7 +236,6 @@ export default function LeadPopup() {
                   />
                 </div>
 
-                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={submitting}
