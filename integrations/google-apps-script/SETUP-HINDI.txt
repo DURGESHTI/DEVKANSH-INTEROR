@@ -1,0 +1,26 @@
+DEVKANSH INTERIOR CMS BRIDGE — SETUP
+
+यह स्क्रिप्ट Google Sheets CMS और Google Drive media upload के लिए है। इसे अपने मौजूदा Apps Script प्रोजेक्ट में सावधानी से जोड़ें। पुराने script का backup पहले बना लें।
+
+1) Google Apps Script खोलें और Code.gs में इस ZIP के integrations/google-apps-script/Code.gs का कोड रखें।
+2) Project Settings > Script Properties में ये तीन properties बनाएं:
+   API_SECRET = वही नया secret जो वेबसाइट के GOOGLE_APPS_SCRIPT_SECRET में होगा
+   SPREADSHEET_ID = Devkansh Interior Website CMS spreadsheet का ID
+   MEDIA_FOLDER_ID = Devkansh Website Media मुख्य folder का ID
+3) Spreadsheet में tab का नाम CMS रखें। पहली row के headers ठीक ये हों:
+   key | payload_json | status | updated_at
+4) Deploy > Manage deployments > Edit (pencil) > New version > Deploy करें। Execute as: Me; Who has access: Anyone.
+5) Deployment Web App URL को वेबसाइट के GOOGLE_APPS_SCRIPT_URL में रखें।
+6) वेबसाइट .env.local में ये variables भरें:
+   GOOGLE_APPS_SCRIPT_URL=... 
+   GOOGLE_APPS_SCRIPT_SECRET=...
+   ADMIN_PANEL_ID=...
+   ADMIN_PANEL_PASSWORD=...
+   ADMIN_SESSION_SECRET=कम-से-कम 32 अक्षरों का नया random secret
+7) Vercel पर deploy करने से पहले यही चार environment variables Vercel Project Settings > Environment Variables में भी सेट करें।
+
+MEDIA LIMIT:
+Admin से image/video upload की अधिकतम सीमा 3 MB प्रति फाइल है। बड़े वीडियो के लिए YouTube या Google Drive embed URL इस्तेमाल करें। Drive पर upload की गई फाइल Anyone with the link — Viewer होगी ताकि public website उसे दिखा सके। निजी ग्राहक वीडियो अपलोड करने से पहले ग्राहक की अनुमति लें।
+
+SECURITY:
+पुराने exposed password/secret को बदलें। .env.local कभी ZIP/GitHub में शामिल न करें। Apps Script Web App URL अकेले secret नहीं है; API_SECRET की सुरक्षा जरूरी है।

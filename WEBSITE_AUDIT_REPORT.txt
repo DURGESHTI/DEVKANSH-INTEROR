@@ -1,0 +1,137 @@
+﻿[INFO] PROJECT LOCATION
+    C:\Users\durag\Downloads\Devkansh_Interior_CMS_Requested_Updates\DEVKANSH-INTEROR-master
+[PASS] package.json
+    Project package file found
+[PASS] NODE MODULES
+    Dependencies folder found
+[INFO] WEBSITE PAGE ROUTES
+    12 page.tsx files found
+    PAGE: \app\page.tsx
+    PAGE: \app\about\page.tsx
+    PAGE: \app\admin\page.tsx
+    PAGE: \app\blog\page.tsx
+    PAGE: \app\blog\[slug]\page.tsx
+    PAGE: \app\contact\page.tsx
+    PAGE: \app\faq\page.tsx
+    PAGE: \app\gallery\page.tsx
+    PAGE: \app\projects\page.tsx
+    PAGE: \app\services\page.tsx
+    PAGE: \app\testimonials\page.tsx
+    PAGE: \app\updates\page.tsx
+[INFO] API ROUTES
+    4 route.ts files found
+    API: \app\api\admin\route.ts
+    API: \app\api\cms\route.ts
+    API: \app\api\cms\public\route.ts
+    API: \app\api\cms\upload\route.ts
+[CHECK] SEO FILE: app/robots.ts
+    Not found at this location
+[CHECK] SEO FILE: app/robots.txt
+    Not found at this location
+[PASS] SEO FILE: public/robots.txt
+    Found
+[CHECK] SEO FILE: app/sitemap.ts
+    Not found at this location
+[CHECK] SEO FILE: app/sitemap.xml
+    Not found at this location
+[CHECK] SEO FILE: public/sitemap.xml
+    Not found at this location
+[PASS] IMPORTANT FILE: app/layout.tsx
+    Found
+[PASS] IMPORTANT FILE: app/page.tsx
+    Found
+[PASS] IMPORTANT FILE: components/home/hero.tsx
+    Found
+[PASS] IMPORTANT FILE: components/lead-popup.tsx
+    Found
+[CHECK] IMPORTANT FILE: next.config.js
+    Not found; may be optional
+[CHECK] IMPORTANT FILE: next.config.ts
+    Not found; may be optional
+[PASS] IMPORTANT FILE: next.config.mjs
+    Found
+[PASS] IMPORTANT FILE: tsconfig.json
+    Found
+[PASS] IMPORTANT FILE: package-lock.json
+    Found
+[INFO] TODO / FIXME markers
+    0 occurrence(s) found. Review required.
+[INFO] Hardcoded localhost references
+    3 occurrence(s) found. Review required.
+[INFO] Potential console debug statements
+    0 occurrence(s) found. Review required.
+[INFO] Image tags
+    15 occurrence(s) found. Review required.
+[INFO] Links opening new tab
+    9 occurrence(s) found. Review required.
+[INFO] Metadata declarations
+    4 occurrence(s) found. Review required.
+[INFO] Google Apps Script references
+    1 occurrence(s) found. Review required.
+[PASS] ENVIRONMENT FILE
+    .env.local found; values hidden
+    ENV KEY: GOOGLE_APPS_SCRIPT_URL
+    ENV KEY: GOOGLE_APPS_SCRIPT_SECRET
+    ENV KEY: ADMIN_PANEL_ID
+    ENV KEY: ADMIN_PANEL_PASSWORD
+    ENV KEY: ADMIN_SESSION_SECRET
+[PASS] NPM SCRIPT: lint
+    Script available
+[CHECK] NPM SCRIPT: typecheck
+    Script not defined
+[PASS] NPM SCRIPT: build
+    Script available
+    
+    > my-project@0.1.0 lint
+    > next lint
+    
+    Invalid project directory provided, no such directory: C:\Users\durag\Downloads\Devkansh_Interior_CMS_Requested_Updates\DEVKANSH-INTEROR-master\lint
+[FAIL] LINT TEST
+    Lint command returned exit code 1
+[PASS] TYPESCRIPT CHECK
+    No TypeScript errors reported
+    
+    > my-project@0.1.0 build
+    > next build
+    
+    Γû▓ Next.js 16.2.0 (Turbopack)
+    - Environments: .env.local
+    
+      Creating an optimized production build ...
+    Γ£ô Compiled successfully in 5.8s
+      Running TypeScript ...
+      Finished TypeScript in 7.4s ...
+      Collecting page data using 7 workers ...
+      Generating static pages using 7 workers (0/11) ...
+      Generating static pages using 7 workers (2/11) 
+      Generating static pages using 7 workers (5/11) 
+      Generating static pages using 7 workers (8/11) 
+    Γ£ô Generating static pages using 7 workers (11/11) in 827ms
+      Finalizing page optimization ...
+    
+    Route (app)
+    Γöî Γùï /
+    Γö£ Γùï /_not-found
+    Γö£ Γùï /about
+    Γö£ Γùï /admin
+    Γö£ ╞Æ /api/admin
+    Γö£ ╞Æ /api/cms
+    Γö£ ╞Æ /api/cms/public
+    Γö£ ╞Æ /api/cms/upload
+    Γö£ ╞Æ /blog
+    Γö£ ╞Æ /blog/[slug]
+    Γö£ Γùï /contact
+    Γö£ Γùï /faq
+    Γö£ Γùï /gallery
+    Γö£ Γùï /icon.png
+    Γö£ Γùï /projects
+    Γö£ Γùï /services
+    Γö£ ╞Æ /testimonials
+    Γöö ╞Æ /updates
+    
+    
+    Γùï  (Static)   prerendered as static content
+    ╞Æ  (Dynamic)  server-rendered on demand
+    
+[PASS] PRODUCTION BUILD
+    Build completed successfully
