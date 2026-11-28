@@ -1,11 +1,10 @@
-﻿import type { MetadataRoute } from 'next'
-import { headers } from 'next/headers'
+import type { MetadataRoute } from 'next'
 import { site } from '@/lib/site'
 
-export const dynamic = 'force-dynamic'
-
+// Keep this sitemap static and independent of request headers or a self-fetch.
+// This avoids runtime failures when Google requests /sitemap.xml.
 const pages = [
-  { path: '', priority: 1.0 },
+  { path: '/', priority: 1.0 },
   { path: '/about', priority: 0.8 },
   { path: '/services', priority: 0.9 },
   { path: '/projects', priority: 0.9 },
@@ -22,45 +21,12 @@ const pages = [
   { path: '/locations/latur', priority: 0.8 },
   { path: '/locations/goa', priority: 0.8 },
   { path: '/locations/ahmednagar', priority: 0.8 },
-]
+] as const
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticPages: MetadataRoute.Sitemap = pages.map((page) => ({
-    url: `${site.url}${page.path}`,
-    lastModified: new Date(),
+export default function sitemap(): MetadataRoute.Sitemap {
+  return pages.map((page) => ({
+    url: new URL(page.path, site.url).toString(),
     changeFrequency: 'weekly',
     priority: page.priority,
   }))
-
-  try {
-    const h = await headers()
-    const host = h.get('x-forwarded-host') || h.get('host')
-    const proto = h.get('x-forwarded-proto') || 'http'
-
-    if (!host) return staticPages
-
-    const response = await fetch(`${proto}://${host}/api/cms/public`, {
-      cache: 'no-store',
-    })
-
-    if (!response.ok) return staticPages
-
-    const data = await response.json()
-
-    const blogPages: MetadataRoute.Sitemap = (data.records || [])
-      .filter((item: any) => item.key?.startsWith('blog:'))
-      .map((item: any) => {
-        const slug = item.payload?.slug || item.key.replace('blog:', '')
-        return {
-          url: `${site.url}/blog/${encodeURIComponent(slug)}`,
-          lastModified: new Date(),
-          changeFrequency: 'monthly' as const,
-          priority: 0.6,
-        }
-      })
-
-    return [...staticPages, ...blogPages]
-  } catch {
-    return staticPages
-  }
 }
